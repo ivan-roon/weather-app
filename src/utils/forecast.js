@@ -10,8 +10,8 @@ const getForecast = (latitude, longtitude, callback) => {
 		} else if (body.error) {
 			callback(`error: ${response.body.error.code},${response.body.error.type} ${response.body.error.info}`);
 		} else {
-			const currentWeather = body.current;
-			callback(undefined, 'It is ' + currentWeather.temperature + ' degrees Celcius. ' + 'Humidity is ' +  currentWeather.humidity + '%.');
+			const { observation_time, temperature, weather_descriptions, humidity  } = body.current;
+			callback(undefined, 'Observation time (UTC) is ' + observation_time + '. It is ' + weather_descriptions[0].toLowerCase() + '. The temperature is ' + temperature + ' degrees Celcius. ' + 'Humidity is ' + humidity + '%.');
 		}
 	});
 }; 
